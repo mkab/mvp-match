@@ -176,22 +176,3 @@ class UserViewSet(viewsets.ModelViewSet):
             permission_classes.extend([IsBuyer, UserIsSelf])
 
         return [permission() for permission in permission_classes]
-
-
-# def login(request):
-#     data = json.loads(request.body)
-#     username = data.get("username")
-#     password = data.get("password")
-
-#     if username is None and password is None:
-#         return JsonResponse("Please enter both username and password", status=400)
-
-#     user = authenticate(username=username, password=password)
-#     if user:
-#         login(request, user)
-#         return JsonResponse({"message": "Logged in!"})
-
-#     return JsonResponse(
-#         {"detail": "Invalid credentials"},
-#         status=400,
-#     )
