@@ -1,8 +1,8 @@
 # Vending Machine Documentation
 
 ## Requirements
-Python >= 3.9.7
-Poetry >= 1.1.12 
+- Python >= 3.9.7
+- Poetry >= 1.1.12 
 
 ## Installation
 
