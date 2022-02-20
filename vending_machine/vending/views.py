@@ -1,3 +1,5 @@
+from typing import List
+
 from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
@@ -12,6 +14,21 @@ from vending.serializers import (
     UserSerializer,
 )
 
+
+def get_change_list(change: int) -> List[int]:
+    change_list = []
+    temp_data = []
+    coins = sorted(AcceptedCoins.values, reverse=True)
+    
+    for coin in coins:
+        count, change = divmod(change, coin)
+        if count:
+            temp_data.append({"count": count, "coin": coin})
+
+    for temp in temp_data:
+        change_list.extend([temp["coin"]] * temp["count"])
+    
+    return change_list    
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
@@ -54,29 +71,17 @@ class ProductViewSet(viewsets.ModelViewSet):
         product: Product = data["product"]
         total_cost = data["total_cost"]
         buyer: User = request.user
-
-        change_list = []
-        temp_data = []
-
+        
         change = buyer.deposit - total_cost
         buyer.deposit = change
-
-        coins = sorted(AcceptedCoins.values, reverse=True)
-
-        for coin in coins:
-            count, change = divmod(change, coin)
-            if count:
-                temp_data.append({"count": count, "coin": coin})
-
-        for temp in temp_data:
-            change_list.extend([temp["coin"]] * temp["count"])
+        # update buyer deposit
+        buyer.save(update_fields=["deposit"])
 
         # update product quantity
         product.available_amount -= data["amount"]
         product.save(update_fields=["available_amount"])
 
-        # update buyer deposit
-        buyer.save(update_fields=["deposit"])
+        change_list = get_change_list(change)
 
         return Response(
             data={
