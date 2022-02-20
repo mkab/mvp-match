@@ -1,0 +1,541 @@
+{
+	"info": {
+		"_postman_id": "7a8448c4-c7b2-412c-bc96-6f9840b6fe72",
+		"name": "Vending Machine",
+		"description": "# Vending Machine Documentation\n\nTo get the token for a user (buyer or seller), use the <b>api-token-auth</b> endpoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{admin_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{max_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/3/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jane\",\r\n    \"password\": \"jane\",\r\n    \"role\": \"buyer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"jane\",\r\n    \"password\": \"jane\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api-token-auth/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api-token-auth",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{max_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deposit\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/3/deposit/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"3",
+								"deposit",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{jane_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/4/reset/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"4",
+								"reset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{tom_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"tom\",\r\n    \"password\": \"tom\",\r\n    \"role\": \"seller\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Attribute by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{mary_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": \"seller\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token acd67387242967a173e0c2b85c33e36ecb04b656",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/user/5/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"user",
+								"5",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{mary_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test product\",\r\n    \"cost\": 100,\r\n    \"available_amount\": 86\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buy Product",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{max_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": 1,\r\n    \"amount\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/buy/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								"buy",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product by ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{tom_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Orange juice\",\r\n    \"cost\": 5,\r\n    \"available_amount\": 32\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/1/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Attribute by ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{mary_token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"available_amount\": 331\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product by ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{tom_token}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/vending-machine/product/2/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"vending-machine",
+								"product",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "default"
+		},
+		{
+			"key": "tom_token",
+			"value": "6c3e9a6d4ccc3e0915df963f46aa7c5e06b98fd2",
+			"type": "default"
+		},
+		{
+			"key": "mary_token",
+			"value": "31e763448b2491398ab7f3a212790f50f198b0a4",
+			"type": "default"
+		},
+		{
+			"key": "max_token",
+			"value": "ef256e8d5690e3db41222cef49a5f7394179bc5d",
+			"type": "default"
+		},
+		{
+			"key": "jane_token",
+			"value": "3a5fec3f8f6e960fc9b4ea99f4ccacdf1b83bb06",
+			"type": "default"
+		},
+		{
+			"key": "admin_token",
+			"value": "97a18e494360cb7660062f7772082b47a3cc6aca",
+			"type": "default"
+		}
+	]
+}
